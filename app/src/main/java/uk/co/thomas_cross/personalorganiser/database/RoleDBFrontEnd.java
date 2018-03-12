@@ -19,6 +19,7 @@ public class RoleDBFrontEnd extends DBFrontEnd {
         super(context);
     }
 
+
     public ArrayList<Role> getRoles(){
 
         ArrayList<Role> roles = new ArrayList<Role>();
@@ -51,7 +52,7 @@ public class RoleDBFrontEnd extends DBFrontEnd {
     public Role addRole(Role role){
 
         ContentValues values = new ContentValues();
-        values.put("role_id",0);
+        values.put("_id",0);
         values.put("owner", role.getOwner());
         values.put("ownerType", role.getOwnerType());
         values.put("title", role.getTitle());
@@ -69,7 +70,7 @@ public class RoleDBFrontEnd extends DBFrontEnd {
 
     public Role getRole(long id){
 
-        String q = "Select * from roles where role_id = "+id;
+        String q = "Select * from roles where _id = "+id;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(q,null);
 
@@ -105,7 +106,7 @@ public class RoleDBFrontEnd extends DBFrontEnd {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        long updateId = db.update("roles",values,"role_id = ?",
+        long updateId = db.update("roles",values,"_id = ?",
                 new String[] {String.valueOf(role.getDatabaseRecordNo())});
         db.close();
 
@@ -117,7 +118,7 @@ public class RoleDBFrontEnd extends DBFrontEnd {
         Role deletedRole = getRole(roleID);
         SQLiteDatabase db = this.getWritableDatabase();
         long id =
-                db.delete("roles","role_id = ?",
+                db.delete("roles","_id = ?",
                         new String[] {String.valueOf(deletedRole.getDatabaseRecordNo())});
         db.close();
         if ( id != roleID )

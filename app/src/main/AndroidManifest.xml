@@ -30,6 +30,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="uk.co.thomas_cross.personalorganiser.MainActivity" />
         </activity>
+        <activity android:name=".PersonCrudActivity"></activity>
     </application>
 
 </manifest>

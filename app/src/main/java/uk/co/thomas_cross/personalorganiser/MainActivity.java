@@ -9,10 +9,12 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -23,8 +25,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+
+import uk.co.thomas_cross.personalorganiser.database.PersonsDBFrontEnd;
+import uk.co.thomas_cross.personalorganiser.entities.Person;
+
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        InitialSetupDialogFragment.InitialSetUpDialogListener {
+
+    private static final String TAG = "PersonalOrganiser";
 
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 101;
     private static final int REQUEST_ROLES_CODE = 102;
@@ -100,12 +110,16 @@ public class MainActivity extends AppCompatActivity
 
         if (permission != PackageManager.PERMISSION_GRANTED) {
 
+            Log.i(TAG, "Permission to write to external storage denied");
+
             if (ActivityCompat.shouldShowRequestPermissionRationale(
-                    this, Manifest.permission.WRITE_EXTERNAL_STORAGE )){
+                    this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+                Log.i(TAG, "shouldShowRationale()");
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 String s = "Permission to create the Personal Organiser database is required!";
                 builder.setMessage(s);
-                 builder.setTitle("Permission Required");
+                builder.setTitle("Permission Required");
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -114,31 +128,63 @@ public class MainActivity extends AppCompatActivity
                 });
                 AlertDialog dialog = builder.create();
                 dialog.show();
+            } else {
+                makeRequest();
+                Log.i(TAG, "shouldNotShowRationale()");
+
             }
 
         } else {
 
-            makeRequest();
+            Log.i(TAG, "Permission to write to external storage granted");
+//            makeRequest();
 
         }
+
+        // The first and only record in the persons table will be the owner of
+        // this personal organiser. If the record does not exist then we
+        // need to request creation of this record by the user.
+
+        if (peopleCount() == 0) {
+            Log.i(TAG, "people count is " + peopleCount());
+            showInitialSetUpDialog();
+        }
+        Log.i(TAG, "people count is " + peopleCount());
+
+
+    }
+
+    private void showInitialSetUpDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        InitialSetupDialogFragment dialogFragment = new InitialSetupDialogFragment();
+        dialogFragment.show(fm, "initial_setup");
+    }
+
+    private int peopleCount() {
+        PersonsDBFrontEnd personsDBFrontEnd = new PersonsDBFrontEnd(this);
+        ArrayList<Person> people = personsDBFrontEnd.getPersons();
+        return people.size();
     }
 
     protected void makeRequest() {
+
+//        Log.i(TAG,"makeRequest()");
+
         ActivityCompat.requestPermissions(this,
                 new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                 REQUEST_WRITE_EXTERNAL_STORAGE);
     }
 
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults){
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         String message = "empty";
-        switch (requestCode){
-            case REQUEST_WRITE_EXTERNAL_STORAGE:{
-                if ( grantResults.length == 0 || grantResults[0] != PackageManager.PERMISSION_GRANTED){
+        switch (requestCode) {
+            case REQUEST_WRITE_EXTERNAL_STORAGE: {
+                if (grantResults.length == 0 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                     message = "Personal Organiser database creation denied.";
                 } else {
                     message = "Personal Organiser database creation allowed.";
                 }
-                Snackbar.make(this.getCurrentFocus(),message,Snackbar.LENGTH_LONG).show();
+                Snackbar.make(this.getCurrentFocus(), message, Snackbar.LENGTH_LONG).show();
                 return;
             }
         }
@@ -218,5 +264,28 @@ public class MainActivity extends AppCompatActivity
                 }
                 break;
         }
+    }
+
+    @Override
+    public void onDialogPositiveClick(Person person) {
+
+        if (person.getFirstName().length() == 0) {
+            Log.i(TAG, "onDialogPositiveClick() - no firstName");
+            return;
+        }
+        if (person.getLastName().length() == 0) {
+            Log.i(TAG, "onDialogPositiveClick() - no lastName");
+            return;
+        }
+        PersonsDBFrontEnd dbFrontEnd = new PersonsDBFrontEnd(this);
+        dbFrontEnd.addPerson(person);
+        Log.i(TAG, "onDialogPositiveClick() " + person.toString() + " has been added!");
+
+    }
+
+    @Override
+    public void onDialogNegativeClick() {
+        Log.i(TAG, "onDialogNegativeClick()");
+        finish();
     }
 }

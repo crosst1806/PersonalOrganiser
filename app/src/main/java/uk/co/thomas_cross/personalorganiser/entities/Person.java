@@ -1,5 +1,7 @@
 package uk.co.thomas_cross.personalorganiser.entities;
 
+import android.widget.EditText;
+
 /**
  * Created by root on 24/12/17.
  */
@@ -9,11 +11,21 @@ public class Person extends DataSensitiveEntity {
     public static final int MALE = 0;
     public static final int FEMALE = 1;
 
-    private String firstName = null;
-    private String middleNames = null;
-    private String lastName = null;
+    private String firstName = new String("");
+    private String middleNames = new String("");
+    private String lastName = new String("");
     private int gender = 0;
     private int userId = 0;
+
+    public Person(){
+        super();
+    }
+
+    public Person(String firstName, String lastName){
+        super();
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
     public void setFirstName(String firstName){
         this.firstName = firstName;
@@ -44,7 +56,7 @@ public class Person extends DataSensitiveEntity {
         return this.gender;
     }
 
-    private void setUserId(int userId){
+    public void setUserId(int userId){
         this.userId = userId;
     }
 

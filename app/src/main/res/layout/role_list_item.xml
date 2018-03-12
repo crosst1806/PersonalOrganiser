@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/rli_record_no"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:text="id"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+    <!--<TextView-->
+    <!--android:id="@+id/rli_owner"-->
+    <!--android:layout_width="140dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Thomas Cross"-->
+    <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/rli_ownerType"-->
+    <!--android:layout_width="140dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Person"-->
+    <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />-->
+
+    <TextView
+        android:id="@+id/rli_title"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:text="UOL Employee"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+    <TextView
+        android:id="@+id/rli_data_sensitivity"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:text="UOL Public"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+    <!--<TextView-->
+    <!--android:id="@+id/rli_time_stamp"-->
+    <!--android:layout_width="140dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="14 Mar 2018 13:00:00"-->
+    <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/rli_last_modified_by"-->
+    <!--android:layout_width="140dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Thomas Cross"-->
+    <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />-->
+
+</LinearLayout>
+
+
