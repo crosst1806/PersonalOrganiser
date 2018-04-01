@@ -15,6 +15,9 @@
             android:id="@+id/locations"
             android:title="Locations" />
         <item
+            android:id="@+id/to_dos"
+            android:title="To Dos" />
+        <item
             android:id="@+id/activitys"
             android:title="Activities" />
     </group>

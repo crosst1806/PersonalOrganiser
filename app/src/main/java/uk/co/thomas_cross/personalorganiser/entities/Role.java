@@ -1,10 +1,14 @@
 package uk.co.thomas_cross.personalorganiser.entities;
 
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
 /**
  * Created by root on 24/12/17.
  */
 
-public class Role extends DataSensitiveEntity {
+public class Role extends DataSensitiveEntity implements Serializable {
 
     private String title = null;
 

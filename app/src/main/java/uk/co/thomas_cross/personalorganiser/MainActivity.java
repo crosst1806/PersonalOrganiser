@@ -25,10 +25,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import uk.co.thomas_cross.personalorganiser.database.PersonsDBFrontEnd;
+import uk.co.thomas_cross.personalorganiser.model.POModel;
+import uk.co.thomas_cross.personalorganiser.entities.Ownable;
 import uk.co.thomas_cross.personalorganiser.entities.Person;
+import uk.co.thomas_cross.personalorganiser.entities.UserId;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -38,6 +41,12 @@ public class MainActivity extends AppCompatActivity
 
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 101;
     private static final int REQUEST_ROLES_CODE = 102;
+    private static final int REQUEST_DATA_SENSITIVITYS_CODE = 103;
+    private static final int REQUEST_LOCATIONS_CODE = 104;
+    private static final int REQUEST_TO_DOS_CODE = 105;
+
+    SimpleDateFormat displayDateFormat = new SimpleDateFormat("dd MMM yyyy HH:mm:sss");
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +58,9 @@ public class MainActivity extends AppCompatActivity
         TabLayout tabLayout =
                 (TabLayout) findViewById(R.id.tab_layout);
 
-        tabLayout.addTab(tabLayout.newTab().setText("Daily Schedule"));
-        tabLayout.addTab(tabLayout.newTab().setText("Page A Day Diary"));
+        tabLayout.addTab(tabLayout.newTab().setText("Timetable"));
+        tabLayout.addTab(tabLayout.newTab().setText("Diary"));
+        tabLayout.addTab(tabLayout.newTab().setText("To Dos"));
 
         final ViewPager viewPager =
                 (ViewPager) findViewById(R.id.pager);
@@ -58,6 +68,7 @@ public class MainActivity extends AppCompatActivity
         final PagerAdapter adapter =
                 new TabPagerAdapter(getSupportFragmentManager(),
                         tabLayout.getTabCount());
+
 
         viewPager.setAdapter(adapter);
 
@@ -71,6 +82,35 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
+                switch (tab.getPosition()) {
+                    case 0:
+                        fab.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Snackbar.make(view, "Add new Planned Activity", Snackbar.LENGTH_LONG)
+                                        .setAction("Action", null).show();
+                            }
+                        });
+                        break;
+                    case 1:
+                        fab.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Snackbar.make(view, "Add new Diary Entry", Snackbar.LENGTH_LONG)
+                                        .setAction("Action", null).show();
+                            }
+                        });
+                        break;
+                    case 2:
+                        fab.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Snackbar.make(view, "Add new To Do", Snackbar.LENGTH_LONG)
+                                        .setAction("Action", null).show();
+                            }
+                        });
+                        break;
+                }
             }
 
             @Override
@@ -85,11 +125,11 @@ public class MainActivity extends AppCompatActivity
         });
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Add new Planned Activity", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -115,9 +155,8 @@ public class MainActivity extends AppCompatActivity
             if (ActivityCompat.shouldShowRequestPermissionRationale(
                     this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 
-                Log.i(TAG, "shouldShowRationale()");
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                String s = "Permission to create the Personal Organiser database is required!";
+                String s = "Permission to create the Personal Organiser model is required!";
                 builder.setMessage(s);
                 builder.setTitle("Permission Required");
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -130,26 +169,20 @@ public class MainActivity extends AppCompatActivity
                 dialog.show();
             } else {
                 makeRequest();
-                Log.i(TAG, "shouldNotShowRationale()");
 
             }
 
         } else {
 
-            Log.i(TAG, "Permission to write to external storage granted");
-//            makeRequest();
+            // The first and only record in the persons table will be the owner of
+            // this personal organiser. If the record does not exist then we
+            // need to request creation of this record by the user.
+
+            if (peopleCount() == 0) {
+                showInitialSetUpDialog();
+            }
 
         }
-
-        // The first and only record in the persons table will be the owner of
-        // this personal organiser. If the record does not exist then we
-        // need to request creation of this record by the user.
-
-        if (peopleCount() == 0) {
-            Log.i(TAG, "people count is " + peopleCount());
-            showInitialSetUpDialog();
-        }
-        Log.i(TAG, "people count is " + peopleCount());
 
 
     }
@@ -161,14 +194,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     private int peopleCount() {
-        PersonsDBFrontEnd personsDBFrontEnd = new PersonsDBFrontEnd(this);
-        ArrayList<Person> people = personsDBFrontEnd.getPersons();
+        POModel personsPOModel = new POModel(this);
+        ArrayList<Person> people = personsPOModel.getPersons();
         return people.size();
     }
 
-    protected void makeRequest() {
 
-//        Log.i(TAG,"makeRequest()");
+    protected void makeRequest() {
 
         ActivityCompat.requestPermissions(this,
                 new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
@@ -180,9 +212,9 @@ public class MainActivity extends AppCompatActivity
         switch (requestCode) {
             case REQUEST_WRITE_EXTERNAL_STORAGE: {
                 if (grantResults.length == 0 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    message = "Personal Organiser database creation denied.";
+                    message = "Personal Organiser model creation denied.";
                 } else {
-                    message = "Personal Organiser database creation allowed.";
+                    message = "Personal Organiser model creation allowed.";
                 }
                 Snackbar.make(this.getCurrentFocus(), message, Snackbar.LENGTH_LONG).show();
                 return;
@@ -236,9 +268,23 @@ public class MainActivity extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.data_sensitivitys) {
 
+            Intent intent = new Intent(this, DisplayDataSensitivitysActivity.class);
+            startActivityForResult(intent, REQUEST_DATA_SENSITIVITYS_CODE);
+
         } else if (id == R.id.locations) {
 
+            Intent intent = new Intent(this, DisplayLocationsActivity.class);
+            startActivityForResult(intent, REQUEST_LOCATIONS_CODE);
+
+        } else if (id == R.id.to_dos) {
+
+            Intent intent = new Intent(this, DisplayToDosActivity.class);
+            startActivityForResult(intent, REQUEST_TO_DOS_CODE);
+
         } else if (id == R.id.activitys) {
+
+            Intent intent = new Intent(this, DisplayActivitysActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_share) {
 
@@ -263,29 +309,85 @@ public class MainActivity extends AppCompatActivity
                             .setAction("Undo", null).show();
                 }
                 break;
+            case REQUEST_DATA_SENSITIVITYS_CODE:
+                if (result_code == RESULT_OK) {
+                    Snackbar.make(this.getCurrentFocus(), "Everything OK", Snackbar.LENGTH_LONG).setAction("Undo", null).show();
+                } else {
+                    Snackbar.make(this.getCurrentFocus(), "Everything not OK", Snackbar.LENGTH_LONG)
+                            .setAction("Undo", null).show();
+                }
+                break;
+            case REQUEST_LOCATIONS_CODE:
+                if (result_code == RESULT_OK) {
+                    Snackbar.make(this.getCurrentFocus(), "Everything OK", Snackbar.LENGTH_LONG).setAction("Undo", null).show();
+                } else {
+                    Snackbar.make(this.getCurrentFocus(), "Everything not OK", Snackbar.LENGTH_LONG)
+                            .setAction("Undo", null).show();
+                }
+                break;
         }
     }
 
     @Override
-    public void onDialogPositiveClick(Person person) {
+    public void onDialogPositiveClick(Person person, UserId userId) {
 
         if (person.getFirstName().length() == 0) {
-            Log.i(TAG, "onDialogPositiveClick() - no firstName");
+            Snackbar.make(this.getCurrentFocus(), "No First Name", Snackbar.LENGTH_LONG).setAction("Undo", null).show();
             return;
         }
         if (person.getLastName().length() == 0) {
-            Log.i(TAG, "onDialogPositiveClick() - no lastName");
+            Snackbar.make(this.getCurrentFocus(), "No Last Name", Snackbar.LENGTH_LONG).setAction("Undo", null).show();
             return;
         }
-        PersonsDBFrontEnd dbFrontEnd = new PersonsDBFrontEnd(this);
-        dbFrontEnd.addPerson(person);
-        Log.i(TAG, "onDialogPositiveClick() " + person.toString() + " has been added!");
+        if (userId.getUserName().length() < 5) {
+            Log.i(TAG, "User Name must be at least 5 characters long.");
+            return;
+        }
+        if (userId.getPassword().length() < 6) {
+            Log.i(TAG, "Password must be at least 6 characters long.");
+            return;
+        }
+        POModel poModel = new POModel(this);
 
+        // Now add the person details we have got to date.
+        // The first person in the model is the owner of the
+        // personal organiser.
+
+//        person.setMiddleNames("santa"); NULL PROBLEM ?
+        final int personId = (int) poModel.addPerson(person);
+        Log.i(TAG, "personId is " + personId);
+
+        // add the user id details that we have
+        userId.setOwner((int) personId);
+        userId.setOwnerType(Ownable.PERSON);
+        userId.setDataSensitivity(0);
+        userId.setLastModifiedBy(1);
+        final int userid = (int) poModel.addUserId(userId);
+        Log.i(TAG, "user id is " + userid);
+
+        // fetch back the person record that now has an id
+        person = poModel.getPerson(personId);
+        person.setOwner(person.getDatabaseRecordNo()); // person owns itself
+        person.setOwnerType(Ownable.PERSON);
+        person.setUserId(userid);       // user id is the one we just added
+        person.setLastModifiedBy(userid);
+        poModel.updatePerson(person);
+
+        // Now fetch back the user id to update details
+        userId = poModel.getUserId(userid);
+        Log.i(TAG, "User Id is " + userId.toString());
+        userId.setOwner(person.getDatabaseRecordNo());
+        userId.setOwnerType(Ownable.PERSON);
+        userId.setLastModifiedBy(userid);   // self referential
+        poModel.updateUserId(userId);
+
+        // Now update the
     }
 
     @Override
-    public void onDialogNegativeClick() {
+    public void onDialogNegativeClick(Person p, UserId userId) {
         Log.i(TAG, "onDialogNegativeClick()");
         finish();
     }
+
 }

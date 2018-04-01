@@ -1,0 +1,114 @@
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context="uk.co.thomas_cross.personalorganiser.DailyScheduleFragment">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/de_date_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:text="Sat 1st March 2018"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/de_text_entry"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:background="#EEEEFF"
+                android:layout_margin="6dp"
+                android:padding="8dp"
+                android:hint="Enter details here ..."/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="6dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Role"
+                android:textColor="#0000FF" />
+
+            <TextView
+                android:id="@+id/de_role"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Actual Data" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Location"
+                android:textColor="#0000FF" />
+
+            <TextView
+                android:id="@+id/de_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Actual Data" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Data Sensitivity"
+                android:textColor="#0000FF" />
+
+            <TextView
+                android:id="@+id/de_data_sensitivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Actual Data" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last Modified Date"
+                android:textColor="#0000FF" />
+
+            <TextView
+                android:id="@+id/de_time_stamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Actual Data" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last Modified By"
+                android:textColor="#0000FF" />
+
+            <TextView
+                android:id="@+id/de_last_mod_by"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Actual Data" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</HorizontalScrollView>

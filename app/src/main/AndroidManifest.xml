@@ -30,7 +30,38 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="uk.co.thomas_cross.personalorganiser.MainActivity" />
         </activity>
-        <activity android:name=".PersonCrudActivity"></activity>
+        <activity android:name=".DisplayDataSensitivitysActivity"
+            android:label="Data Sensitivities"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="uk.co.thomas_cross.personalorganiser.MainActivity" />
+        </activity>
+        <activity android:name=".DisplayLocationsActivity"
+            android:label="Locations"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="uk.co.thomas_cross.personalorganiser.MainActivity" />
+        </activity>
+        <activity android:name=".DisplayToDosActivity"
+            android:label="To Dos"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="uk.co.thomas_cross.personalorganiser.MainActivity" />
+        </activity>
+        <activity android:name=".DisplayActivitysActivity"
+            android:label="Activities"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="uk.co.thomas_cross.personalorganiser.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

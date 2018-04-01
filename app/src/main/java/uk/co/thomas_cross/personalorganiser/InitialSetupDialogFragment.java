@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 
 import uk.co.thomas_cross.personalorganiser.entities.Person;
+import uk.co.thomas_cross.personalorganiser.entities.UserId;
 
 /**
  * Created by thomas on 11/03/18.
@@ -24,14 +25,18 @@ public class InitialSetupDialogFragment extends DialogFragment {
 
     private EditText firstName;
     private EditText lastName;
+    private EditText userName;
+    private EditText password;
+
     private Person person = new Person();
+    private UserId userId = new UserId();
 
     /* The activity that creates an instance of this dialog fragment must
       * implement this interface in order to receive event callbacks.
       * Each method passes the DialogFragment in case the host needs to query it. */
     public interface InitialSetUpDialogListener {
-        public void onDialogPositiveClick(Person person);
-        public void onDialogNegativeClick();
+        public void onDialogPositiveClick(Person person, UserId userId);
+        public void onDialogNegativeClick(Person person, UserId userId);
     }
 
     // Use this instance of the interface to deliver action events
@@ -46,6 +51,9 @@ public class InitialSetupDialogFragment extends DialogFragment {
         View view = inflater.inflate(R.layout.initial_setup, null);
         firstName = view.findViewById(R.id.is_first_name);
         lastName = view.findViewById(R.id.is_last_name);
+        userName = view.findViewById(R.id.is_user_name);
+        password = view.findViewById(R.id.is_password);
+
         builder.setView(view);
         builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
@@ -54,7 +62,12 @@ public class InitialSetupDialogFragment extends DialogFragment {
                 person = new Person();
                 person.setFirstName(firstName.getText().toString());
                 person.setLastName(lastName.getText().toString());
-                mListener.onDialogPositiveClick(person);
+
+                userId = new UserId();
+                userId.setUserName(userName.getText().toString());
+                userId.setPassword(password.getText().toString());
+
+                mListener.onDialogPositiveClick(person,userId);
 
             }
         });
@@ -62,32 +75,18 @@ public class InitialSetupDialogFragment extends DialogFragment {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                mListener.onDialogNegativeClick();
+                mListener.onDialogNegativeClick(null,null);
                 InitialSetupDialogFragment.this.getDialog().cancel();
             }
         });
         builder.setTitle("Initial Set Up");
 
-        // Old Version that worked.
-//        builder.setView(inflater.inflate(R.layout.initial_setup, null))
-//                // Add action buttons
-//                .setPositiveButton("Save", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int id) {
-//                        // sign in the user ...
-//                    }
-//                })
-//                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int id) {
-//                        InitialSetupDialogFragment.this.getDialog().cancel();
-//                    }
-//                });
         return builder.create();
     }
 
 
 
-    // Override the Fragment.onAttach() method to instantiate the NoticeDialogListener
+    // Override the Fragment.onAttach() method to instantiate the DialogListener
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -102,39 +101,5 @@ public class InitialSetupDialogFragment extends DialogFragment {
         }
     }
 
-//    public InitialSetupDialogFragment(){
-//
-//    }
-//
-//
-//    public static InitialSetupDialogFragment newInstance(String title) {
-//        InitialSetupDialogFragment frag = new InitialSetupDialogFragment();
-//        Bundle args = new Bundle();
-//        args.putString("title", title);
-//        frag.setArguments(args);
-//        return frag;
-//    }
-
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//        return inflater.inflate(R.layout.initial_setup, container);
-//    }
-
-//    @Override
-//    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-//        super.onViewCreated(view, savedInstanceState);
-//        // Get field from view
-////        mEditText = (EditText) view.findViewById(R.id.txt_your_name);
-//        // Fetch arguments from bundle and set title
-//        String title = getArguments().getString("title", "Enter Name");
-//        getDialog().setTitle(title);
-//        getDialog().setTitle("My God");
-//        // Show soft keyboard automatically and request focus to field
-////        mEditText.requestFocus();
-//        getDialog().getWindow().setSoftInputMode(
-//                WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-//        getDialog
-//    }
 }
 

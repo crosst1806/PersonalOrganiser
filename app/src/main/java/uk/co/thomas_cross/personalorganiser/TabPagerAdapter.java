@@ -28,6 +28,9 @@ public class TabPagerAdapter extends FragmentPagerAdapter {
             case 1:
                 DailyDiaryFragment tab2 = new DailyDiaryFragment();
                 return tab2;
+            case 2:
+                ToDoListFragment tab3 = new ToDoListFragment();
+                return tab3;
             default:
                 return null;
 

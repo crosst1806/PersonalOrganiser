@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:orientation="horizontal"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+
+    <TextView
+        android:id="@+id/dsli_record_no"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:text="Id"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:paddingLeft="6dp"/>
+
+    <TextView
+        android:id="@+id/dsli_title"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:text="UOL Employee"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:paddingLeft="6dp"/>
+
+
+</LinearLayout>
+
+
+

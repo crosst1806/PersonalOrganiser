@@ -24,4 +24,8 @@ public class UserId extends DataSensitiveEntity {
     public String getPassword(){
         return this.password;
     }
+
+    public String toString(){
+        return this.userName + " " + this.getPassword();
+    }
 }

@@ -1,16 +1,18 @@
 package uk.co.thomas_cross.personalorganiser.entities;
 
+import java.io.Serializable;
+
 /**
  * Created by root on 24/12/17.
  */
 
-public class Location extends Entity {
+public class Location extends Entity implements Serializable {
 
     public static final int NO_PLACE = 0;
 
     private  String title = null;
     private int locationCategory = 0;
-    private int locationRecordNo = 0;
+    private int categoryRecordNo = 0;
 
     public void setTitle(String title){
         this.title = title;
@@ -28,12 +30,12 @@ public class Location extends Entity {
         return  this.locationCategory;
     }
 
-    public void setLocationRecordNo(int locationRecordNo){
-        this.locationRecordNo = locationRecordNo;
+    public void setCategoryRecordNo(int categoryRecordNo){
+        this.categoryRecordNo = categoryRecordNo;
     }
 
-    public int getLocationRecordNo() {
-        return this.locationRecordNo;
+    public int getCategoryRecordNo() {
+        return this.categoryRecordNo;
     }
 
     public String toString(){

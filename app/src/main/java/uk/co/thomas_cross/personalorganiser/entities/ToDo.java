@@ -1,16 +1,18 @@
 package uk.co.thomas_cross.personalorganiser.entities;
 
+import java.io.Serializable;
+
 /**
  * Created by root on 24/12/17.
  */
 
-public class ToDo extends DataSensitiveEntity {
+public class ToDo extends DataSensitiveEntity implements Serializable {
 
     private int role = 0;
     private int location = 0;
     private String description = "";
-    private int priority = 0;
-    private String targetDateTime = "";
+    private int priority = 3;
+    private String targetDate = "";
 
     public void setRole(int role){
         this.role = role;
@@ -44,12 +46,12 @@ public class ToDo extends DataSensitiveEntity {
         return this.priority;
     }
 
-    public void setTargetDateTime(String targetDateTime){
-        this.targetDateTime = targetDateTime;
+    public void setTargetDate(String targetDate){
+        this.targetDate = targetDate;
     }
 
-    public String getTargetDateTime(){
-        return this.targetDateTime;
+    public String getTargetDate(){
+        return this.targetDate;
     }
 
     public String toString(){

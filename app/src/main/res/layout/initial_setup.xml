@@ -37,4 +37,18 @@
         android:inputType="textCapWords"
         android:singleLine="true" />
 
+    <EditText
+        android:id="@+id/is_user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Choose User Name"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/is_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Choose Password"
+        android:singleLine="true" />
+
 </LinearLayout>

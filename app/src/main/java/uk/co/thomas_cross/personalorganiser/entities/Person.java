@@ -15,7 +15,7 @@ public class Person extends DataSensitiveEntity {
     private String middleNames = new String("");
     private String lastName = new String("");
     private int gender = 0;
-    private int userId = 0;
+    private long userId = 0;
 
     public Person(){
         super();
@@ -56,11 +56,11 @@ public class Person extends DataSensitiveEntity {
         return this.gender;
     }
 
-    public void setUserId(int userId){
+    public void setUserId(long userId){
         this.userId = userId;
     }
 
-    public int getUserId(){
+    public long getUserId(){
         return this.userId;
     }
 

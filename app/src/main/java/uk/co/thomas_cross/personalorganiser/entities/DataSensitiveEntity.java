@@ -7,7 +7,7 @@ package uk.co.thomas_cross.personalorganiser.entities;
 public class DataSensitiveEntity extends Entity implements DataSensitive {
 
     private int dataSensitivity = 0;
-    private String timeStamp = null;
+    private String timeStamp = new String("");
     private int lastModifiedBy = 0;
 
     @Override
