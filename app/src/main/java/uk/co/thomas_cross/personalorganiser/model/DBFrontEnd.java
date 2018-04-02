@@ -16,6 +16,7 @@ import uk.co.thomas_cross.personalorganiser.entities.Activity;
 import uk.co.thomas_cross.personalorganiser.entities.DataSensitivity;
 import uk.co.thomas_cross.personalorganiser.entities.DiaryEntry;
 import uk.co.thomas_cross.personalorganiser.entities.Location;
+import uk.co.thomas_cross.personalorganiser.entities.PlannedActivity;
 import uk.co.thomas_cross.personalorganiser.entities.ToDo;
 import uk.co.thomas_cross.personalorganiser.entities.Ownable;
 import uk.co.thomas_cross.personalorganiser.entities.Person;
@@ -124,6 +125,18 @@ public class DBFrontEnd extends SQLiteOpenHelper {
                 " dataSensitivity integer, " +
                 " timeStamp text not null, lastModifiedBy integer)";
 
+        String createPlannedActivitys = "Create table plannedActivitys (" +
+                " _id integer primary key autoincrement," +
+                " owner integer, ownerType integer," +
+                " role integer, location integer," +
+                " activity integer, code text not null, description text not null," +
+                " medianMinutes integer, priority integer," +
+                " generatorType integer, generatorId integer, " +
+                " startDate text not null, startTime text not null, " +
+                " endDateTime text not null, timeTaken integer, "+
+                " status integer, dataSensitivity integer, " +
+                " timeStamp text not null, lastModifiedBy integer)";
+
         db.execSQL(createPersons);
         db.execSQL(createDataSensitivitys);
         db.execSQL(createRoles);
@@ -132,6 +145,7 @@ public class DBFrontEnd extends SQLiteOpenHelper {
         db.execSQL(createToDos);
         db.execSQL(createActivitys);
         db.execSQL(createDiary);
+        db.execSQL(createPlannedActivitys);
     }
 
     @Override
@@ -1252,6 +1266,185 @@ public class DBFrontEnd extends SQLiteOpenHelper {
             db.setTransactionSuccessful();
         } catch (Exception e){
             Log.i(TAG,"Error whilst deleting diaryEntry");
+        } finally {
+            db.endTransaction();
+        }
+    }
+
+    public ArrayList<PlannedActivity> getPlannedActivitys() {
+
+        ArrayList<PlannedActivity> plannedActivities = new ArrayList<PlannedActivity>();
+
+        String sql = "select * from plannedActivitys";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(sql, null);
+        try {
+            if (cursor.moveToFirst()) {
+
+                do {
+
+                    PlannedActivity pa = new PlannedActivity();
+                    pa.setDatabaseRecordNo(cursor.getInt(0));
+                    pa.setOwner(cursor.getInt(1));
+                    pa.setOwnerType(cursor.getInt(2));
+                    pa.setRole(cursor.getInt(3));
+                    pa.setLocation(cursor.getInt(4));
+                    pa.setActivity(cursor.getInt(5));
+                    pa.setCode(cursor.getString(6));
+                    pa.setDescription(cursor.getString(7));
+                    pa.setMedianMinutes(cursor.getInt(8));
+                    pa.setPriority(cursor.getInt(9));
+                    pa.setGeneratorType(cursor.getInt(10));
+                    pa.setGeneratorId(cursor.getInt(11));
+                    pa.setStartDate(cursor.getString(12));
+                    pa.setStartTime(cursor.getString(13));
+                    pa.setEndDateTime(cursor.getString(14));
+                    pa.setTimeTaken(cursor.getInt(15));
+                    pa.setStatus(cursor.getInt(16));
+                    pa.setDataSensitivity(cursor.getInt(17));
+                    pa.setTimeStamp(cursor.getString(18));
+                    pa.setLastModifiedBy(cursor.getInt(19));
+                    plannedActivities.add(pa);
+
+                } while (cursor.moveToNext());
+            }
+
+        } catch (Exception e) {
+            Log.i(TAG, "Error whilst fetching Planned Activitys from Database");
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+
+        }
+
+
+        return plannedActivities;
+    }
+
+
+    public long addPlannedActivity(PlannedActivity pa) {
+
+        ContentValues values = new ContentValues();
+        values.put("owner", pa.getOwner());
+        values.put("ownerType", pa.getOwnerType());
+        values.put("role",pa.getRole());
+        values.put("location",pa.getLocation());
+        values.put("activity",pa.getActivity());
+        values.put("code",pa.getCode());
+        values.put("description",pa.getDescription());
+        values.put("medianMinutes",pa.getMedianMinutes());
+        values.put("priority",pa.getPriority());
+        values.put("generatorType",pa.getGeneratorType());
+        values.put("generatorId",pa.getGeneratorId());
+        values.put("startDate",pa.getStartDate());
+        values.put("startTime",pa.getStartTime());
+        values.put("endDateTime",pa.getEndDateTime());
+        values.put("timeTaken",pa.getTimeTaken());
+        values.put("status",pa.getStatus());
+        values.put("dataSensitivity",pa.getDataSensitivity());
+        values.put("timeStamp",timeStampDateFormat.format(new Date()));
+        values.put("lastModifiedBy",pa.getLastModifiedBy());
+
+        long newId = -1;
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.beginTransaction();
+        try {
+            newId = db.insertOrThrow("plannedActivitys", null, values);
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            Log.i(TAG, "Error trying to add " + pa + " to model");
+        } finally {
+            db.endTransaction();
+        }
+        return newId;
+
+    }
+
+    public PlannedActivity getPlannedActivity(int id) {
+
+        String q = "Select * from plannedActivitys where _id = " + id;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(q, null);
+
+        PlannedActivity pa = null;
+        try {
+            if (cursor.moveToFirst()) {
+                cursor.moveToFirst();
+                pa = new PlannedActivity();
+                pa.setDatabaseRecordNo(cursor.getInt(0));
+                pa.setOwner(cursor.getInt(1));
+                pa.setOwnerType(cursor.getInt(2));
+                pa.setRole(cursor.getInt(3));
+                pa.setLocation(cursor.getInt(4));
+                pa.setActivity(cursor.getInt(5));
+                pa.setCode(cursor.getString(6));
+                pa.setDescription(cursor.getString(7));
+                pa.setMedianMinutes(cursor.getInt(8));
+                pa.setPriority(cursor.getInt(9));
+                pa.setGeneratorType(cursor.getInt(10));
+                pa.setGeneratorId(cursor.getInt(11));
+                pa.setStartDate(cursor.getString(12));
+                pa.setStartTime(cursor.getString(13));
+                pa.setEndDateTime(cursor.getString(14));
+                pa.setTimeTaken(cursor.getInt(15));
+                pa.setStatus(cursor.getInt(16));
+                pa.setDataSensitivity(cursor.getInt(17));
+                pa.setTimeStamp(cursor.getString(18));
+                pa.setLastModifiedBy(cursor.getInt(19));
+            }
+        } catch (Exception e){
+            Log.i(TAG,"Error whilst fetching a Planned Activity");
+        } finally {
+            if ( cursor != null && !cursor.isClosed()){
+                cursor.close();
+            }
+        }
+
+        return pa;
+
+    }
+
+    public long updatePlannedActivity(PlannedActivity pa) {
+
+        ContentValues values = new ContentValues();
+        values.put("owner", pa.getOwner());
+        values.put("ownerType", pa.getOwnerType());
+        values.put("role",pa.getRole());
+        values.put("location",pa.getLocation());
+        values.put("activity",pa.getActivity());
+        values.put("code",pa.getCode());
+        values.put("description",pa.getDescription());
+        values.put("medianMinutes",pa.getMedianMinutes());
+        values.put("priority",pa.getPriority());
+        values.put("generatorType",pa.getGeneratorType());
+        values.put("generatorId",pa.getGeneratorId());
+        values.put("startDate",pa.getStartDate());
+        values.put("startTime",pa.getStartTime());
+        values.put("endDateTime",pa.getEndDateTime());
+        values.put("timeTaken",pa.getTimeTaken());
+        values.put("status",pa.getStatus());
+        values.put("dataSensitivity",pa.getDataSensitivity());
+        values.put("timeStamp",timeStampDateFormat.format(new Date()));
+        values.put("lastModifiedBy",pa.getLastModifiedBy());
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        return db.update("plannedActivitys", values, "_id = ?",
+                new String[]{String.valueOf(pa.getDatabaseRecordNo())});
+    }
+
+    public void deletePlannedActivity(int id) {
+
+        PlannedActivity pa = getPlannedActivity(id);
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.beginTransaction();
+        try {
+            db.delete("plannedActivitys", "_id = ?",
+                    new String[]{String.valueOf(pa.getDatabaseRecordNo())});
+            db.setTransactionSuccessful();
+        } catch (Exception e){
+            Log.i(TAG,"Error whilst deleting planned activity");
         } finally {
             db.endTransaction();
         }

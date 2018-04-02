@@ -51,7 +51,6 @@ public class DiaryEntryArrayAdapter extends ArrayAdapter {
 
         POModel poModel = new POModel(getContext());
         // Populate the data into the template view using the data object
-//        idView.setText(String.valueOf(toDo.getDatabaseRecordNo()));
         Role r = poModel.getRole(diaryEntry.getRole());
         roleView.setText(r.getTitle());
         Location location = poModel.getLocation(diaryEntry.getLocation());

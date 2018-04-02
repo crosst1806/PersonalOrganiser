@@ -51,15 +51,6 @@ public class ToDoListFragment extends Fragment {
         ToDoArrayAdapter adapter = new ToDoArrayAdapter(getContext(), toDos);
         listView.setAdapter(adapter);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Add new Planned Activity", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
         return view;
     }
 

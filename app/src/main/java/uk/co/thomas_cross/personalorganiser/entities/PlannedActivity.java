@@ -1,10 +1,12 @@
 package uk.co.thomas_cross.personalorganiser.entities;
 
+import java.io.Serializable;
+
 /**
  * Created by root on 24/12/17.
  */
 
-public class PlannedActivity extends DataSensitiveEntity {
+public class PlannedActivity extends DataSensitiveEntity implements Serializable {
 
     public static final int PENDING = 0;
     public static final int EXECUTING = 1;
@@ -52,7 +54,7 @@ public class PlannedActivity extends DataSensitiveEntity {
         this.activity = activity;
     }
 
-    private int getActivity(){
+    public int getActivity(){
         return  this.activity;
     }
 
@@ -114,5 +116,9 @@ public class PlannedActivity extends DataSensitiveEntity {
     }
 
     public int getStatus(){ return this.status; }
+
+    public String toString(){
+        return description;
+    }
 
 }

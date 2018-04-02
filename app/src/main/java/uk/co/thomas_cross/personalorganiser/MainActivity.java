@@ -50,10 +50,53 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        // We need permission to create and use the personalOrganiser.db in external storage
+
+        int permission = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+
+            Log.i(TAG, "Permission to write to external storage denied");
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                String s = "Permission to create the Personal Organiser model is required!";
+                builder.setMessage(s);
+                builder.setTitle("Permission Required");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        makeRequest();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            } else {
+                makeRequest();
+
+            }
+
+        } else {
+
+            // The first and only record in the persons table will be the owner of
+            // this personal organiser. If the record does not exist then we
+            // need to request creation of this record by the user.
+
+            if (peopleCount() == 0) {
+                showInitialSetUpDialog();
+            }
+
+        }
+
 
         TabLayout tabLayout =
                 (TabLayout) findViewById(R.id.tab_layout);
@@ -143,46 +186,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // We need permission to create and use the personalOrganiser.db in external storage
-
-        int permission = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-
-            Log.i(TAG, "Permission to write to external storage denied");
-
-            if (ActivityCompat.shouldShowRequestPermissionRationale(
-                    this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                String s = "Permission to create the Personal Organiser model is required!";
-                builder.setMessage(s);
-                builder.setTitle("Permission Required");
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        makeRequest();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            } else {
-                makeRequest();
-
-            }
-
-        } else {
-
-            // The first and only record in the persons table will be the owner of
-            // this personal organiser. If the record does not exist then we
-            // need to request creation of this record by the user.
-
-            if (peopleCount() == 0) {
-                showInitialSetUpDialog();
-            }
-
-        }
 
 
     }
@@ -247,7 +250,12 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_filter_roles){
+            return true;
+        }
+
+        if (id == R.id.action_exit) {
+            finish();
             return true;
         }
 
@@ -286,10 +294,6 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this, DisplayActivitysActivity.class);
             startActivity(intent);
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -302,28 +306,28 @@ public class MainActivity extends AppCompatActivity
                                     Intent data) {
         switch (request_code) {
             case REQUEST_ROLES_CODE:
-                if (result_code == RESULT_OK) {
-                    Snackbar.make(this.getCurrentFocus(), "Everything OK", Snackbar.LENGTH_LONG).setAction("Undo", null).show();
-                } else {
-                    Snackbar.make(this.getCurrentFocus(), "Everything not OK", Snackbar.LENGTH_LONG)
-                            .setAction("Undo", null).show();
-                }
+//                if (result_code == RESULT_OK) {
+//                    Snackbar.make(this.getCurrentFocus(), "Everything OK", Snackbar.LENGTH_LONG).setAction("Undo", null).show();
+//                } else {
+//                    Snackbar.make(this.getCurrentFocus(), "Everything not OK", Snackbar.LENGTH_LONG)
+//                            .setAction("Undo", null).show();
+//                }
                 break;
             case REQUEST_DATA_SENSITIVITYS_CODE:
-                if (result_code == RESULT_OK) {
-                    Snackbar.make(this.getCurrentFocus(), "Everything OK", Snackbar.LENGTH_LONG).setAction("Undo", null).show();
-                } else {
-                    Snackbar.make(this.getCurrentFocus(), "Everything not OK", Snackbar.LENGTH_LONG)
-                            .setAction("Undo", null).show();
-                }
+//                if (result_code == RESULT_OK) {
+//                    Snackbar.make(this.getCurrentFocus(), "Everything OK", Snackbar.LENGTH_LONG).setAction("Undo", null).show();
+//                } else {
+//                    Snackbar.make(this.getCurrentFocus(), "Everything not OK", Snackbar.LENGTH_LONG)
+//                            .setAction("Undo", null).show();
+//                }
                 break;
             case REQUEST_LOCATIONS_CODE:
-                if (result_code == RESULT_OK) {
-                    Snackbar.make(this.getCurrentFocus(), "Everything OK", Snackbar.LENGTH_LONG).setAction("Undo", null).show();
-                } else {
-                    Snackbar.make(this.getCurrentFocus(), "Everything not OK", Snackbar.LENGTH_LONG)
-                            .setAction("Undo", null).show();
-                }
+//                if (result_code == RESULT_OK) {
+//                    Snackbar.make(this.getCurrentFocus(), "Everything OK", Snackbar.LENGTH_LONG).setAction("Undo", null).show();
+//                } else {
+//                    Snackbar.make(this.getCurrentFocus(), "Everything not OK", Snackbar.LENGTH_LONG)
+//                            .setAction("Undo", null).show();
+//                }
                 break;
         }
     }

@@ -1,8 +1,7 @@
 <resources>
-    <string name="app_name">Personal Organiser</string>
-    <string name="action_settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_name">Personal Organiser</string>
+
     <string name="daily_schedule_fragment">Daily Schedule Fragment</string>
     <string name="daily_diary_fragment">Daily Diary Fragment</string>
     <string name="title_activity_main">MainActivity</string>
@@ -12,8 +11,6 @@
     <string name="title_role_list">Roles</string>
     <string name="title_role_detail">Role Detail</string>
     <string name="title_activity_roles">Roles</string>
-    <!--<string name="title_activity_main2">Main2Activity</string>-->
-    <!--<string name="title_activity_main3">Main3Activity</string>-->
     <string name="title_activity_display_roles">Roles</string>
-    <!--<string name="hello_dolly">Hello Dolly</string>-->
+
 </resources>

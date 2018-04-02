@@ -35,6 +35,7 @@ public class TabPagerAdapter extends FragmentPagerAdapter {
                 return null;
 
         }
+
     }
 
     @Override

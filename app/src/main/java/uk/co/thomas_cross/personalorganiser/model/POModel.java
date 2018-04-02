@@ -18,6 +18,7 @@ import uk.co.thomas_cross.personalorganiser.entities.DiaryEntry;
 import uk.co.thomas_cross.personalorganiser.entities.Location;
 import uk.co.thomas_cross.personalorganiser.entities.Ownable;
 import uk.co.thomas_cross.personalorganiser.entities.Person;
+import uk.co.thomas_cross.personalorganiser.entities.PlannedActivity;
 import uk.co.thomas_cross.personalorganiser.entities.Role;
 import uk.co.thomas_cross.personalorganiser.entities.ToDo;
 import uk.co.thomas_cross.personalorganiser.entities.UserId;
@@ -396,6 +397,48 @@ public class POModel {
     public void deleteDiaryEntry(int id) {
 
         dbFrontEnd.deleteDiaryEntry(id);
+
+    }
+
+    public ArrayList<PlannedActivity> getPlannedActivitys() {
+
+        ArrayList<PlannedActivity> pas =  dbFrontEnd.getPlannedActivitys();
+
+        PlannedActivity pa1 = new PlannedActivity();
+        pa1.setDatabaseRecordNo(1);
+        pa1.setOwner(1);
+        pa1.setOwnerType(Ownable.PERSON);
+        pa1.setStartDate("25-12-2018");
+        pa1.setStartTime("14:30");
+        pa1.setCode("OPEN-GIFTS");
+        pa1.setDescription("Start Opening all those Lovely Presents");
+        pa1.setStatus(1);
+
+        pas.add(pa1);
+        return pas;
+    }
+
+    public long addPlannedActivity(PlannedActivity plannedActivity) {
+
+        return dbFrontEnd.addPlannedActivity(plannedActivity);
+
+    }
+
+    public PlannedActivity getPlannedActivity(int id) {
+
+        return dbFrontEnd.getPlannedActivity(id);
+
+    }
+
+    public long updatePlannedActivity(PlannedActivity plannedActivity) {
+
+        return dbFrontEnd.updatePlannedActivity(plannedActivity);
+
+    }
+
+    public void deletePlannedActivity(int id) {
+
+        dbFrontEnd.deletePlannedActivity(id);
 
     }
 
