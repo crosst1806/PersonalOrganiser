@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:orientation="vertical">
+
+        <!-- Id Label -->
+        <TextView
+            android:id="@+id/cfasli_record_no_label"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Id"
+            android:textColor="#0000FF" />
+
+        <!-- Id View -->
+        <TextView
+            android:id="@+id/cfasli_record_no_view"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <!-- Activity Label -->
+        <TextView
+            android:id="@+id/cfasli_activity_label"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Activity"
+            android:textColor="#0000FF" />
+
+        <!-- Activity View -->
+        <TextView
+            android:id="@+id/cfasli_activity_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Activity Description Goes Here"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <!-- Activity Spinner -->
+        <Spinner
+            android:id="@+id/cfasli_activity_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></Spinner>
+
+        <!-- Execution Order Label -->
+        <TextView
+            android:id="@+id/cfasli_execution_order_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Execution Order"
+            android:textColor="#0000FF" />
+
+        <!-- Execution Order View -->
+        <TextView
+            android:id="@+id/cfasli_execution_order_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="99"/>
+
+        <!-- Execution Order Input-->
+        <EditText
+            android:id="@+id/cfasli_execution_order_input"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:text="99"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <!-- Duration Label -->
+        <TextView
+            android:id="@+id/cfasli_duration_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Duration"
+            android:textColor="#0000FF" />
+
+        <!-- Duration View -->
+        <TextView
+            android:id="@+id/cfasli_duration__view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="60"/>
+
+        <!-- Duration Input-->
+        <EditText
+            android:id="@+id/cfasli_duration_input"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:text="60"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:orientation="vertical">
+
+        <!-- Id Label -->
+        <TextView
+            android:id="@+id/ai_id_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Id"
+            android:textColor="#0000FF" />
+
+        <!-- Id Input -->
+        <TextView
+            android:id="@+id/ai_id_view"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <!-- Owner Label -->
+        <TextView
+            android:id="@+id/ai_owner_label"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Owner"
+            android:textColor="#0000FF" />
+
+
+        <!-- Owner Input -->
+        <TextView
+            android:id="@+id/ai_owner_view"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="President Bush"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+
+        <!-- Owner Type Label -->
+        <TextView
+            android:id="@+id/ai_owner_type_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Owner Type"
+            android:textColor="#0000FF" />
+
+        <!-- Owner Type Input -->
+        <TextView
+            android:id="@+id/ai_owner_type_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Group"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <!-- Role Label -->
+        <TextView
+            android:id="@+id/ai_role_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Role"
+            android:textColor="#0000FF" />
+
+        <!-- Role View -->
+        <TextView
+            android:id="@+id/ai_role_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter Role Description"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <!-- Role Combo Box -->
+        <Spinner
+            android:id="@+id/ai_role_spinner"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"></Spinner>
+
+        <!-- Location Label -->
+        <TextView
+            android:id="@+id/ai_location_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location"
+            android:textColor="#0000FF" />
+
+        <!-- Location View -->
+        <TextView
+            android:id="@+id/ai_location_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter location description"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <!-- Location Combo Box -->
+        <Spinner
+            android:id="@+id/ai_location_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></Spinner>
+
+
+        <!-- Activity Label -->
+        <TextView
+            android:id="@+id/ai_activity_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Activity"
+            android:textColor="#0000FF" />
+
+        <!-- Activity View -->
+        <TextView
+            android:id="@+id/ai_activity_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Activity description"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <Spinner
+            android:id="@+id/ai_activity_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></Spinner>
+
+        <!-- Priority Label -->
+        <TextView
+            android:id="@+id/ai_priority_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Priority"
+            android:textColor="#0000FF" />
+
+        <!-- Priority Text Field -->
+        <TextView
+            android:id="@+id/ai_priority_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+
+        <Spinner
+            android:id="@+id/ai_priority_spinner"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"></Spinner>
+
+        <!-- Frequency Interval Label -->
+        <TextView
+            android:id="@+id/ai_frequency_interval_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Frequency Interval"
+            android:textColor="#0000FF" />
+
+        <!-- Frequency Interval Text Field -->
+        <TextView
+            android:id="@+id/ai_frequency_interval_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Every n Days"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <Spinner
+            android:id="@+id/ai_frequency_interval_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></Spinner>
+
+        <!-- Frequency Label -->
+        <TextView
+            android:id="@+id/ai_frequency_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Frequency"
+            android:textColor="#0000FF" />
+
+        <!-- Frequency Text Field -->
+        <TextView
+            android:id="@+id/ai_frequency_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <!-- Frequency Edit Text Field -->
+        <EditText
+            android:id="@+id/ai_frequency_input"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:text="1"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <!-- Exempted Days Label -->
+        <TextView
+            android:id="@+id/ai_exempted_days_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Exempted Days"
+            android:textColor="#0000FF" />
+
+        <!-- Exempted Days View -->
+        <TextView
+            android:id="@+id/ai_exempted_days_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MTWTFSS"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/ai_monday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Monday" />
+
+            <CheckBox
+                android:id="@+id/ai_tuesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tuesday" />
+
+            <CheckBox
+                android:id="@+id/ai_wednesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wednesday" />
+
+            <CheckBox
+                android:id="@+id/ai_thursday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thursday" />
+
+            <CheckBox
+                android:id="@+id/ai_friday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Friday" />
+
+            <CheckBox
+                android:id="@+id/ai_saturday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Saturday" />
+
+            <CheckBox
+                android:id="@+id/ai_sunday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sunday" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Start Date Label -->
+            <TextView
+                android:id="@+id/ai_start_date_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start Date"
+                android:textColor="#0000FF" />
+
+            <!-- Start Date Text View -->
+            <TextView
+                android:id="@+id/ai_start_date_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="04 Apr 2018"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+            <!-- Start Date Edit Text -->
+            <EditText
+                android:id="@+id/ai_start_date_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:hint="Enter Date"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Start Time Label -->
+            <TextView
+                android:id="@+id/ai_start_time_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start Time"
+                android:textColor="#0000FF" />
+
+            <!-- Start Time View -->
+            <TextView
+                android:id="@+id/ai_start_time_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="23:10"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+            <!-- Start Time Input-->
+            <EditText
+                android:id="@+id/ai_start_time_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:hint="Enter Time"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- End Date Label -->
+            <TextView
+                android:id="@+id/ai_end_date_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="End Date"
+                android:textColor="#0000FF" />
+
+            <!-- End Date Text View -->
+            <TextView
+                android:id="@+id/ai_end_date_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="04 Apr 2018"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+            <!-- End Date Edit Text -->
+            <EditText
+                android:id="@+id/ai_end_date_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:hint="Enter Date"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- End Time Label -->
+            <TextView
+                android:id="@+id/ai_end_time_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="End Time"
+                android:textColor="#0000FF" />
+
+            <!-- End Time View -->
+            <TextView
+                android:id="@+id/ai_end_time_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="23:10"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+            <!-- End Time Input-->
+            <EditText
+                android:id="@+id/ai_end_time_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:hint="Enter Time"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <!-- Status Label -->
+            <TextView
+                android:id="@+id/ai_status_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status"
+                android:textColor="#0000FF" />
+
+            <!-- Status View -->
+            <TextView
+                android:id="@+id/ai_status_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Disabled"
+                android:layout_marginStart="8dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        </LinearLayout>
+
+        <!-- Data Sensitivity Label -->
+        <TextView
+            android:id="@+id/ai_data_sensitivity_label"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:text="Data Sensitivity"
+            android:textColor="#0000FF" />
+
+        <!-- Data Sensitivity Text Field -->
+        <TextView
+            android:id="@+id/ai_data_sensitivity_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data Sensitivity"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+
+        <Spinner
+            android:id="@+id/ai_data_sensitivity_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></Spinner>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Time Stamp  Label -->
+            <TextView
+                android:id="@+id/ai_time_stamp_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lmd"
+                android:textColor="#0000FF" />
+
+            <!-- Time Stamp Input -->
+            <TextView
+                android:id="@+id/ai_time_stamp_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="24 Dec 1982 22:48:00"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+
+            <!-- Last Modified By Label -->
+            <TextView
+                android:id="@+id/ai_lmb_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lmb"
+                android:textColor="#0000FF" />
+
+            <!-- Last Modified By Input -->
+            <TextView
+                android:id="@+id/ai_lmb_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="churchillw"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>

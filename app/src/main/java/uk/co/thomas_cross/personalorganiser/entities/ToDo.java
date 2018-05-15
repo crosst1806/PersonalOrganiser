@@ -2,11 +2,14 @@ package uk.co.thomas_cross.personalorganiser.entities;
 
 import java.io.Serializable;
 
+import uk.co.thomas_cross.personalorganiser.LocationAssociated;
+
 /**
  * Created by root on 24/12/17.
  */
 
-public class ToDo extends DataSensitiveEntity implements Serializable {
+public class ToDo extends DataSensitiveEntity
+                    implements RoleAssociated, LocationAssociated, Serializable {
 
     private int role = 0;
     private int location = 0;

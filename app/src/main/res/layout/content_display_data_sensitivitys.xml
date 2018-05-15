@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="uk.co.thomas_cross.personalorganiser.DisplayDataSensitivitysActivity"
+    tools:context="uk.co.thomas_cross.personalorganiser.DisplayDataSensitivitys"
     tools:showIn="@layout/activity_display_data_sensitivities">
 
     <LinearLayout
@@ -15,7 +15,7 @@
         android:orientation="vertical">
 
         <include
-            layout="@layout/data_sensitivitys_list_view_header"
+            layout="@layout/list_header_data_sensitivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

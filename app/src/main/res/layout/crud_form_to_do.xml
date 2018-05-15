@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:orientation="vertical">
+
+        <!-- Id Label -->
+        <TextView
+            android:id="@+id/record_no_label"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:text="Id"
+            android:textColor="#0000FF" />
+
+        <!-- Id Input -->
+        <TextView
+            android:id="@+id/record_no"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="20dp"
+            android:text="0"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <!-- Owner Label -->
+        <TextView
+            android:id="@+id/owner_label"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:text="Owner"
+            android:textColor="#0000FF" />
+
+
+        <!-- Owner Input -->
+        <TextView
+            android:id="@+id/owner"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="20dp"
+            android:text="President Bush"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+
+        <!-- Owner Type Label -->
+        <TextView
+            android:id="@+id/owner_type_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:text="Owner Type"
+            android:textColor="#0000FF" />
+
+        <!-- Owner Type Input -->
+        <TextView
+            android:id="@+id/owner_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="20dp"
+            android:text="Group"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <!-- Role Label -->
+        <TextView
+            android:id="@+id/role_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:text="Role"
+            android:textColor="#0000FF" />
+
+        <!-- Role View -->
+        <TextView
+            android:id="@+id/role_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="20dp"
+            android:text="Enter Role Description"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <!-- Role Combo Box -->
+        <Spinner
+            android:id="@+id/role_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"></Spinner>
+
+        <!-- Location Label -->
+        <TextView
+            android:id="@+id/location_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:text="Location"
+            android:textColor="#0000FF" />
+
+        <!-- Location View -->
+        <TextView
+            android:id="@+id/location_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="20dp"
+            android:text="Enter location description"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <!-- Location Combo Box -->
+        <Spinner
+            android:id="@+id/location_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"></Spinner>
+
+
+        <!-- Description Label -->
+        <TextView
+            android:id="@+id/description_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:text="Description"
+            android:textColor="#0000FF" />
+
+        <!-- Description View -->
+        <TextView
+            android:id="@+id/description_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="20dp"
+            android:text="Enter description"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <!-- Description Input-->
+        <EditText
+            android:id="@+id/description_edit_text"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="36dp"
+            android:layout_marginStart="20dp"
+            android:hint="Enter Description"
+            android:inputType="textCapWords"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <!-- Priority Label -->
+        <TextView
+            android:id="@+id/priority_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="36dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:text="Priority"
+            android:textColor="#0000FF" />
+
+        <!-- Priority Text Field -->
+        <TextView
+            android:id="@+id/priority_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="36dp"
+            android:layout_marginStart="20dp"
+            android:text="5"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+
+        <Spinner
+            android:id="@+id/priority_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp">
+
+        </Spinner>
+
+        <!-- Target Date Label -->
+        <TextView
+            android:id="@+id/target_date_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:text="Target Date"
+            android:textColor="#0000FF" />
+
+        <!-- Target Date Time View -->
+        <TextView
+            android:id="@+id/target_date_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="20dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <!-- Target Date Time Input-->
+        <EditText
+            android:id="@+id/target_date_edit_text"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="36dp"
+            android:layout_marginStart="20dp"
+            android:hint="Enter Date"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <!-- Data Sensitivity Label -->
+        <TextView
+            android:id="@+id/data_sensitivity_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="36dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:text="Data Sensitivity"
+            android:textColor="#0000FF" />
+
+        <!-- Data Sensitivity Text Field -->
+        <TextView
+            android:id="@+id/data_sensitivity_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="36dp"
+            android:layout_marginStart="20dp"
+            android:text="Data Sensitivity"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+
+        <Spinner
+            android:id="@+id/data_sensitivity_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp">
+
+        </Spinner>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <!-- Time Stamp  Label -->
+            <TextView
+                android:id="@+id/time_stamp_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="20dp"
+                android:text="Lmd"
+                android:textColor="#0000FF" />
+
+            <!-- Time Stamp Input -->
+            <TextView
+                android:id="@+id/time_stamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="24 Dec 1982 22:48:00"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+
+            <!-- Last Modified By Label -->
+            <TextView
+                android:id="@+id/last_modified_by_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="20dp"
+                android:text="Lmb"
+                android:textColor="#0000FF" />
+
+            <!-- Last Modified By Input -->
+            <TextView
+                android:id="@+id/last_modified_by"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="churchillw"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>

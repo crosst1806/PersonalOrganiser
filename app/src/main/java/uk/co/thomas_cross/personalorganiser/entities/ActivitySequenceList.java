@@ -1,10 +1,12 @@
 package uk.co.thomas_cross.personalorganiser.entities;
 
+import java.io.Serializable;
+
 /**
  * Created by root on 25/12/17.
  */
 
-public class ActivitySequenceList extends DataSensitiveEntity {
+public class ActivitySequenceList extends DataSensitiveEntity implements Serializable {
 
     private int role = 0;
     private int location = 0;

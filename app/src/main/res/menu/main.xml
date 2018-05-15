@@ -2,9 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_filter_roles"
+        android:id="@+id/action_filter_by_role"
         android:orderInCategory="100"
-        android:title="Filter Roles"
+        android:title="Filter By Role"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_filter_by_location"
+        android:orderInCategory="100"
+        android:title="Filter By Location"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_select_date"
+        android:orderInCategory="100"
+        android:title="Select Date"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_exit"

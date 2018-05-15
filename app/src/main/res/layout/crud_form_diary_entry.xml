@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp">
+
+            <TextView
+                android:id="@+id/time_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="23:14" />
+
+            <TextView
+                android:id="@+id/date_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="25-Dec-1962" />
+
+        </RelativeLayout>
+
+
+        <!-- Text Entry Label -->
+        <TextView
+            android:id="@+id/text_entry_label"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Text Entry"
+            android:textColor="#0000FF" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Text Entry View -->
+            <TextView
+                android:id="@+id/text_entry_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="3"
+                android:text="Make Entry"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+            <!-- Text Entry Input-->
+            <EditText
+                android:id="@+id/text_entry_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|left"
+                android:layout_marginEnd="16dp"
+                android:singleLine="false"
+                android:text="Make Entry"
+                android:scrollHorizontally="false"
+                android:inputType="textMultiLine|textCapSentences"/>
+
+                <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />-->
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Role Label -->
+            <TextView
+                android:id="@+id/role_label"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:text="Role"
+                android:textColor="#0000FF" />
+
+            <!-- Role View -->
+            <TextView
+                android:id="@+id/role_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Benjamin Disraeli"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+            <!-- Role Spinner -->
+            <Spinner
+                android:id="@+id/role_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </Spinner>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Location Label -->
+            <TextView
+                android:id="@+id/location_label"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:text="Location"
+                android:textColor="#0000FF" />
+
+            <!-- Location View -->
+            <TextView
+                android:id="@+id/location_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Buckingham Palace"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+            <!-- Location Spinner -->
+            <Spinner
+                android:id="@+id/location_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </Spinner>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Data Sensitivity Label -->
+            <TextView
+                android:id="@+id/data_sensitivity_label"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:text="Sensitivity"
+                android:textColor="#0000FF" />
+
+            <!-- Data Sensitivity View -->
+            <TextView
+                android:id="@+id/data_sensitivity_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Top Secret"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Id Label -->
+            <TextView
+                android:id="@+id/record_no_label"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:text="Id"
+                android:textColor="#0000FF" />
+
+
+            <!-- Id Input -->
+            <TextView
+                android:id="@+id/record_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Owner Label -->
+            <TextView
+                android:id="@+id/owner_label"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:text="Owner"
+                android:textColor="#0000FF" />
+
+
+            <!-- Owner Input -->
+            <TextView
+                android:id="@+id/owner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="President Bush"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Owner Type Label -->
+            <TextView
+                android:id="@+id/owner_type_label"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:text="Owner Type"
+                android:textColor="#0000FF" />
+
+            <!-- Owner Type Input -->
+            <TextView
+                android:id="@+id/owner_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Group"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Time Stamp Label -->
+            <TextView
+                android:id="@+id/time_stamp_label"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:text="Time Stamp"
+                android:textColor="#0000FF" />
+
+            <!-- Time Stamp View -->
+            <TextView
+                android:id="@+id/time_stamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12-Mar-2000 14:32:123"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Last Modified By Label -->
+            <TextView
+                android:id="@+id/last_modified_by_label"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:text="Last Mod. By"
+                android:textColor="#0000FF" />
+
+            <!-- Last Modified By View -->
+            <TextView
+                android:id="@+id/last_modified_by_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="enfieldh"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

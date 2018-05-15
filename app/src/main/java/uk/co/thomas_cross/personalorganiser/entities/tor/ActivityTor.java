@@ -15,6 +15,13 @@ public class ActivityTor implements Comparator {
 
         Activity a1 = (Activity) o1;
         Activity a2 = (Activity) o2;
+
+        if ( a1.getDatabaseRecordNo() == 0 )
+            return -1;
+
+        if ( a2.getDatabaseRecordNo() == 0 )
+            return +1;
+
         return a1.getDescription().compareTo(a2.getDescription());
 
     }

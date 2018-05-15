@@ -1,14 +1,38 @@
-<HorizontalScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="uk.co.thomas_cross.personalorganiser.DailyDiaryFragment">
 
-
-    <ListView
-        android:id="@+id/dairy_entry_list_view"
+    <TextView
+        android:id="@+id/diary_display_date"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
+        android:paddingLeft="12dp"
+        android:paddingTop="6dp"
+        android:text="Thursday 18th June 1962"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
-</HorizontalScrollView>
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="6dp">
+
+            <ListView
+                android:id="@+id/dairy_entry_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+</LinearLayout>

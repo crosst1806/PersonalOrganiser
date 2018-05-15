@@ -1,12 +1,13 @@
 package uk.co.thomas_cross.personalorganiser.entities;
 
+import java.io.Serializable;
 import java.security.PublicKey;
 
 /**
  * Created by root on 25/12/17.
  */
 
-public class ActivityIteration extends DataSensitiveEntity {
+public class ActivityIteration extends DataSensitiveEntity implements Serializable {
 
     public static final int DISABLED = 0;
     public static final int ENABLED = 1;
@@ -107,5 +108,9 @@ public class ActivityIteration extends DataSensitiveEntity {
 
     public int getStatus(){ return  this.status; }
 
+    public String toString(){
+        return String.valueOf(this.getDatabaseRecordNo()
+         + this.role + this.location);
+    }
 
 }

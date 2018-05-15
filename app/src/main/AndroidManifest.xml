@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DisplayRolesActivity"
+            android:name=".DisplayRoles"
             android:label="@string/title_activity_display_roles"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -30,7 +30,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="uk.co.thomas_cross.personalorganiser.MainActivity" />
         </activity>
-        <activity android:name=".DisplayDataSensitivitysActivity"
+        <activity android:name=".DisplayDataSensitivitys"
             android:label="Data Sensitivities"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -38,7 +38,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="uk.co.thomas_cross.personalorganiser.MainActivity" />
         </activity>
-        <activity android:name=".DisplayLocationsActivity"
+        <activity android:name=".DisplayLocations"
             android:label="Locations"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -46,21 +46,37 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="uk.co.thomas_cross.personalorganiser.MainActivity" />
         </activity>
-        <activity android:name=".DisplayToDosActivity"
-            android:label="To Dos"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="uk.co.thomas_cross.personalorganiser.MainActivity" />
-        </activity>
-        <activity android:name=".DisplayActivitysActivity"
+        <activity android:name=".DisplayActivitys"
             android:label="Activities"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="uk.co.thomas_cross.personalorganiser.MainActivity" />
+        </activity>
+        <activity android:name=".DisplayActivityIterations"
+            android:label="Activity Iterations"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="uk.co.thomas_cross.personalorganiser.MainActivity" />
+        </activity>
+        <activity android:name=".DisplayActivitySequences"
+            android:label="Activity Sequences"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="uk.co.thomas_cross.personalorganiser.MainActivity" />
+        </activity>
+        <activity android:name=".DisplayActivitySequenceListItems"
+            android:label="Activity Sequence List"
+            android:parentActivityName=".DisplayActivitySequences"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="uk.co.thomas_cross.personalorganiser.DisplayActivitySequences" />
         </activity>
     </application>
 

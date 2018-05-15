@@ -15,24 +15,18 @@
             android:id="@+id/locations"
             android:title="Locations" />
         <item
-            android:id="@+id/to_dos"
-            android:title="To Dos" />
-        <item
             android:id="@+id/activitys"
             android:title="Activities" />
+        <item
+            android:id="@+id/activity_iterations"
+            android:title="Activity Iterations" />
+        <item
+            android:id="@+id/activity_sequences"
+            android:title="Activity Sequences" />
+        <item
+            android:id="@+id/sequence_iterations"
+            android:title="Sequence Iterations" />
     </group>
 
-    <!--<item android:title="Communicate">-->
-        <!--<menu>-->
-            <!--<item-->
-                <!--android:id="@+id/nav_share"-->
-                <!--android:icon="@drawable/ic_menu_share"-->
-                <!--android:title="Share" />-->
-            <!--<item-->
-                <!--android:id="@+id/nav_send"-->
-                <!--android:icon="@drawable/ic_menu_send"-->
-                <!--android:title="Send" />-->
-        <!--</menu>-->
-    <!--</item>-->
 
 </menu>

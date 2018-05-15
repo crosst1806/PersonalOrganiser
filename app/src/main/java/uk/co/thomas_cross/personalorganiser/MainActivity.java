@@ -1,6 +1,7 @@
 package uk.co.thomas_cross.personalorganiser;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,6 +16,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -24,29 +26,45 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
+import uk.co.thomas_cross.personalorganiser.adapters.TabPagerAdapter;
+import uk.co.thomas_cross.personalorganiser.entities.DiaryEntry;
+import uk.co.thomas_cross.personalorganiser.entities.PlannedActivity;
+import uk.co.thomas_cross.personalorganiser.entities.ToDo;
 import uk.co.thomas_cross.personalorganiser.model.POModel;
 import uk.co.thomas_cross.personalorganiser.entities.Ownable;
 import uk.co.thomas_cross.personalorganiser.entities.Person;
 import uk.co.thomas_cross.personalorganiser.entities.UserId;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,
-        InitialSetupDialogFragment.InitialSetUpDialogListener {
+public class MainActivity extends AppCompatActivity implements
+        NavigationView.OnNavigationItemSelectedListener,
+        InitialSetupDialog.InitialSetUpDialogListener {
 
     private static final String TAG = "PersonalOrganiser";
 
-    private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 101;
-    private static final int REQUEST_ROLES_CODE = 102;
-    private static final int REQUEST_DATA_SENSITIVITYS_CODE = 103;
-    private static final int REQUEST_LOCATIONS_CODE = 104;
-    private static final int REQUEST_TO_DOS_CODE = 105;
+    private static final int SHOW_TIME_TABLE = 0;
+    private static final int SHOW_DIARY = 1;
+    private static final int SHOW_TO_DOS = 2;
 
-    SimpleDateFormat displayDateFormat = new SimpleDateFormat("dd MMM yyyy HH:mm:sss");
+    private int currentDisplay = SHOW_TIME_TABLE;
+
+    private SimpleDateFormat timeStampStorageFormat
+            = new SimpleDateFormat("yyyyMMddHHmmsss");
+
+    private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 101;
+
+    SimpleDateFormat diaryEntryCreationDateFormat = new SimpleDateFormat("dd MMM yyyy HH:mm");
     private FloatingActionButton fab;
+
+    private TabPagerAdapter adapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,13 +81,11 @@ public class MainActivity extends AppCompatActivity
 
         if (permission != PackageManager.PERMISSION_GRANTED) {
 
-            Log.i(TAG, "Permission to write to external storage denied");
-
             if (ActivityCompat.shouldShowRequestPermissionRationale(
                     this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                String s = "Permission to create the Personal Organiser model is required!";
+                String s = "Permission to create the Personal Organiser Database is required!";
                 builder.setMessage(s);
                 builder.setTitle("Permission Required");
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -97,8 +113,7 @@ public class MainActivity extends AppCompatActivity
 
         }
 
-
-        TabLayout tabLayout =
+        final TabLayout tabLayout =
                 (TabLayout) findViewById(R.id.tab_layout);
 
         tabLayout.addTab(tabLayout.newTab().setText("Timetable"));
@@ -108,9 +123,7 @@ public class MainActivity extends AppCompatActivity
         final ViewPager viewPager =
                 (ViewPager) findViewById(R.id.pager);
 
-        final PagerAdapter adapter =
-                new TabPagerAdapter(getSupportFragmentManager(),
-                        tabLayout.getTabCount());
+        adapter =  new TabPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
 
 
         viewPager.setAdapter(adapter);
@@ -124,32 +137,49 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-                switch (tab.getPosition()) {
-                    case 0:
+
+                currentDisplay = tab.getPosition();
+
+                viewPager.setCurrentItem(currentDisplay);
+
+                switch (currentDisplay) {
+                    case SHOW_TIME_TABLE:
                         fab.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Snackbar.make(view, "Add new Planned Activity", Snackbar.LENGTH_LONG)
-                                        .setAction("Action", null).show();
+
+                                PlannedActivity pa = generateNewPlannedActivity();
+                                showPlannedActivityCrudDialog(PlannedActivityCrudDialog.CREATE_MODE, pa);
                             }
                         });
                         break;
-                    case 1:
+                    case SHOW_DIARY:
                         fab.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Snackbar.make(view, "Add new Diary Entry", Snackbar.LENGTH_LONG)
-                                        .setAction("Action", null).show();
+
+                                DiaryEntry de = new DiaryEntry();
+                                de.setOwner(1);
+                                de.setOwnerType(Ownable.PERSON);
+                                de.setDateTime(diaryEntryCreationDateFormat.format(new Date()));
+                                de.setTextEntry("");
+                                de.setTimeStamp(timeStampStorageFormat.format(new Date()));
+                                de.setLastModifiedBy(1);
+
+                                showDiaryEntryCrudDialog(DiaryEntryCrudDialog.CREATE_MODE, de);
                             }
                         });
                         break;
-                    case 2:
+                    case SHOW_TO_DOS:
                         fab.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Snackbar.make(view, "Add new To Do", Snackbar.LENGTH_LONG)
-                                        .setAction("Action", null).show();
+                                ToDo newToDo = new ToDo();
+                                newToDo.setOwner(1);
+                                newToDo.setOwnerType(Ownable.PERSON);
+                                newToDo.setTimeStamp(timeStampStorageFormat.format(new Date()));
+                                newToDo.setLastModifiedBy(1);
+                                showToDoCrudDialog(ToDoCrudDialog.CREATE_MODE, newToDo);
                             }
                         });
                         break;
@@ -172,8 +202,9 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Add new Planned Activity", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                PlannedActivity pa = generateNewPlannedActivity();
+                showPlannedActivityCrudDialog(PlannedActivityCrudDialog.CREATE_MODE, pa);
             }
         });
 
@@ -187,17 +218,16 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-
     }
 
     private void showInitialSetUpDialog() {
         FragmentManager fm = getSupportFragmentManager();
-        InitialSetupDialogFragment dialogFragment = new InitialSetupDialogFragment();
+        InitialSetupDialog dialogFragment = new InitialSetupDialog();
         dialogFragment.show(fm, "initial_setup");
     }
 
     private int peopleCount() {
-        POModel personsPOModel = new POModel(this);
+        POModel personsPOModel = POModel.getInstance(this);
         ArrayList<Person> people = personsPOModel.getPersons();
         return people.size();
     }
@@ -250,7 +280,20 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_filter_roles){
+
+        if (id == R.id.action_filter_by_role) {
+            showFilterByRoleDialog();
+            return true;
+        }
+
+        if ( id == R.id.action_filter_by_location){
+            showFilterByLocationDialog();
+            return true;
+        }
+
+        if (id == R.id.action_select_date) {
+            DatePickerDialog dialog = initialiaseCalendarDialog();
+            dialog.show();
             return true;
         }
 
@@ -270,66 +313,44 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.roles) {
 
-            Intent intent = new Intent(this, DisplayRolesActivity.class);
-            startActivityForResult(intent, REQUEST_ROLES_CODE);
+            Intent intent = new Intent(this, DisplayRoles.class);
+            startActivity(intent);
 
-            // Handle the camera action
         } else if (id == R.id.data_sensitivitys) {
 
-            Intent intent = new Intent(this, DisplayDataSensitivitysActivity.class);
-            startActivityForResult(intent, REQUEST_DATA_SENSITIVITYS_CODE);
+            Intent intent = new Intent(this, DisplayDataSensitivitys.class);
+            startActivity(intent);
 
         } else if (id == R.id.locations) {
 
-            Intent intent = new Intent(this, DisplayLocationsActivity.class);
-            startActivityForResult(intent, REQUEST_LOCATIONS_CODE);
-
-        } else if (id == R.id.to_dos) {
-
-            Intent intent = new Intent(this, DisplayToDosActivity.class);
-            startActivityForResult(intent, REQUEST_TO_DOS_CODE);
+            Intent intent = new Intent(this, DisplayLocations.class);
+            startActivity(intent);
 
         } else if (id == R.id.activitys) {
 
-            Intent intent = new Intent(this, DisplayActivitysActivity.class);
+            Intent intent = new Intent(this, DisplayActivitys.class);
             startActivity(intent);
+
+        } else if ( id == R.id.activity_iterations ){
+
+            Intent intent = new Intent(this, DisplayActivityIterations.class);
+            startActivity(intent);
+
+        } else if ( id == R.id.activity_sequences ){
+
+            Intent intent = new Intent(this, DisplayActivitySequences.class);
+            startActivity(intent);
+
+        } else if ( id == R.id.sequence_iterations ){
+
+//            Intent intent = new Intent(this, DisplayActivityIterations.class);
+//            startActivity(intent);
 
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    protected void onActivityResult(int request_code,
-                                    int result_code,
-                                    Intent data) {
-        switch (request_code) {
-            case REQUEST_ROLES_CODE:
-//                if (result_code == RESULT_OK) {
-//                    Snackbar.make(this.getCurrentFocus(), "Everything OK", Snackbar.LENGTH_LONG).setAction("Undo", null).show();
-//                } else {
-//                    Snackbar.make(this.getCurrentFocus(), "Everything not OK", Snackbar.LENGTH_LONG)
-//                            .setAction("Undo", null).show();
-//                }
-                break;
-            case REQUEST_DATA_SENSITIVITYS_CODE:
-//                if (result_code == RESULT_OK) {
-//                    Snackbar.make(this.getCurrentFocus(), "Everything OK", Snackbar.LENGTH_LONG).setAction("Undo", null).show();
-//                } else {
-//                    Snackbar.make(this.getCurrentFocus(), "Everything not OK", Snackbar.LENGTH_LONG)
-//                            .setAction("Undo", null).show();
-//                }
-                break;
-            case REQUEST_LOCATIONS_CODE:
-//                if (result_code == RESULT_OK) {
-//                    Snackbar.make(this.getCurrentFocus(), "Everything OK", Snackbar.LENGTH_LONG).setAction("Undo", null).show();
-//                } else {
-//                    Snackbar.make(this.getCurrentFocus(), "Everything not OK", Snackbar.LENGTH_LONG)
-//                            .setAction("Undo", null).show();
-//                }
-                break;
-        }
     }
 
     @Override
@@ -351,7 +372,7 @@ public class MainActivity extends AppCompatActivity
             Log.i(TAG, "Password must be at least 6 characters long.");
             return;
         }
-        POModel poModel = new POModel(this);
+        POModel poModel = POModel.getInstance(this);
 
         // Now add the person details we have got to date.
         // The first person in the model is the owner of the
@@ -359,7 +380,7 @@ public class MainActivity extends AppCompatActivity
 
 //        person.setMiddleNames("santa"); NULL PROBLEM ?
         final int personId = (int) poModel.addPerson(person);
-        Log.i(TAG, "personId is " + personId);
+//        Log.i(TAG, "personId is " + personId);
 
         // add the user id details that we have
         userId.setOwner((int) personId);
@@ -379,7 +400,6 @@ public class MainActivity extends AppCompatActivity
 
         // Now fetch back the user id to update details
         userId = poModel.getUserId(userid);
-        Log.i(TAG, "User Id is " + userId.toString());
         userId.setOwner(person.getDatabaseRecordNo());
         userId.setOwnerType(Ownable.PERSON);
         userId.setLastModifiedBy(userid);   // self referential
@@ -390,8 +410,90 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onDialogNegativeClick(Person p, UserId userId) {
-        Log.i(TAG, "onDialogNegativeClick()");
+//        Log.i(TAG, "onDialogNegativeClick()");
         finish();
+    }
+
+    private void showToDoCrudDialog(int mode, ToDo toDo) {
+        FragmentManager fm = getSupportFragmentManager();
+        ToDoCrudDialog dialogFragment = ToDoCrudDialog.newInstance(mode, toDo);
+        dialogFragment.show(fm, "crud_form_to_do");
+    }
+
+    private void showPlannedActivityCrudDialog(int mode, PlannedActivity pa) {
+        FragmentManager fm = getSupportFragmentManager();
+        PlannedActivityCrudDialog dialogFragment = PlannedActivityCrudDialog.newInstance(mode, pa);
+        dialogFragment.show(fm, "crud_form_planned_activity");
+    }
+
+    private void showDiaryEntryCrudDialog(int mode, DiaryEntry de) {
+        FragmentManager fm = getSupportFragmentManager();
+        DiaryEntryCrudDialog dialogFragment = DiaryEntryCrudDialog.newInstance(mode, de);
+        dialogFragment.show(fm, "crud_form_diary_entry");
+    }
+
+    private void showFilterByRoleDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        FilterRolesDialog filterRolesDialog = FilterRolesDialog.newInstance();
+        filterRolesDialog.show(fm, "filter_roles");
+    }
+
+    private void showFilterByLocationDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        FilterByLocationDialog dialog = FilterByLocationDialog.newInstance();
+        dialog.show(fm,"tag");
+    }
+
+
+    private Calendar currentDate = Calendar.getInstance();
+
+    private DatePickerDialog initialiaseCalendarDialog() {
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+
+                new DatePickerDialog.OnDateSetListener() {
+
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        currentDate.set(year,monthOfYear,dayOfMonth);
+                        doSomething(currentDate);
+                        adapter.refresh(currentDate);
+                    }
+
+                }, currentDate.get(Calendar.YEAR), currentDate.get(Calendar.MONTH),
+                                                        currentDate.get(Calendar.DAY_OF_MONTH));
+
+        return datePickerDialog;
+    }
+
+    private void doSomething(Calendar date){
+        POModel model = POModel.getInstance(this);
+        model.setCurrentDate(date);
+
+    }
+
+
+    private SimpleDateFormat endDateStorageFormat = new SimpleDateFormat("dd-MMM-yyyy  HH:mm");
+    private SimpleDateFormat startDateStorageFormat = new SimpleDateFormat("yyyyMMdd");
+    private SimpleDateFormat startTimeStorageFormat = new SimpleDateFormat("HH:mm");
+
+    /**
+     * Generates a newly created and blank planned activity for the fab
+     * button.
+     *
+     * @return the newly generated planned activity
+     */
+    private PlannedActivity generateNewPlannedActivity() {
+        PlannedActivity pa = new PlannedActivity();
+        pa.setOwner(1);
+        pa.setOwnerType(Ownable.PERSON);
+        pa.setPriority(3);
+        Calendar calendar = Calendar.getInstance();
+        pa.setStartDate(startDateStorageFormat.format(calendar.getTime()));
+        pa.setStartTime(startTimeStorageFormat.format(calendar.getTime()));
+        calendar.add(Calendar.MINUTE, 60);
+        pa.setEndDateTime(endDateStorageFormat.format(calendar.getTime()));
+        pa.setLastModifiedBy(1);
+        return pa;
     }
 
 }

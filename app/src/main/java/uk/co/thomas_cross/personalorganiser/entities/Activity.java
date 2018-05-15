@@ -2,11 +2,15 @@ package uk.co.thomas_cross.personalorganiser.entities;
 
 import java.io.Serializable;
 
+import uk.co.thomas_cross.personalorganiser.LocationAssociated;
+
 /**
  * Created by root on 24/12/17.
  */
 
-public class Activity extends DataSensitiveEntity implements Serializable {
+public class Activity extends DataSensitiveEntity
+
+        implements Serializable, RoleAssociated, LocationAssociated {
 
     private int role = 0;
     private int location = 0;
@@ -69,7 +73,9 @@ public class Activity extends DataSensitiveEntity implements Serializable {
         return this.medianMinutes;
     }
 
-
+    public String toString(){
+        return this.description;
+    }
 
 
 }

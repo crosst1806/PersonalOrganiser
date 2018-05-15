@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="uk.co.thomas_cross.personalorganiser.DisplayDataSensitivitysActivity">
+    tools:context="uk.co.thomas_cross.personalorganiser.DisplayDataSensitivitys">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
